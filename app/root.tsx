@@ -5,16 +5,21 @@ import {
   Scripts,
 } from "@remix-run/react";
 import { type LinksFunction } from "@remix-run/node";
-import faviconAssetUrl from './assets/favicon.svg'
+import faviconAssetUrl from './assets/favicon.svg';
+import fontStylesheetUrl from './styles/font.css';
 
 export const links: LinksFunction = () => {
   return [
-		{
-			rel: 'icon',
-			type: 'image/svg+xml',
-			href: faviconAssetUrl,
-		},
-	]
+    {
+      rel: 'icon',
+      type: 'image/svg+xml',
+      href: faviconAssetUrl,
+    },
+    {
+      rel: 'stylesheet',
+      href: fontStylesheetUrl,
+    }
+  ]
 }
 
 export default function App() {
