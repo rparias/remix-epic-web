@@ -4,6 +4,17 @@ import {
   Meta,
   Scripts,
 } from "@remix-run/react";
+import { type LinksFunction } from "@remix-run/node";
+
+export const links: LinksFunction = () => {
+  return [
+		{
+			rel: 'icon',
+			type: 'image/svg+xml',
+			href: '/favicon.svg',
+		},
+	]
+}
 
 export default function App() {
   return (
