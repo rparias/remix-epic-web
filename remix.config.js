@@ -1,5 +1,8 @@
 /** @type {import('@remix-run/dev').AppConfig} */
-module.exports = {
+export default {
   ignoredRouteFiles: ["**/.*"],
-  serverModuleFormat: "cjs",
+  serverModuleFormat: "esm",
+  tailwind: true,
+	postcss: true,
+	watchPaths: ['./tailwind.config.ts'],
 };
