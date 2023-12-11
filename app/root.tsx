@@ -1,4 +1,5 @@
 import {
+	Link,
   Links,
   LiveReload,
   Outlet,
@@ -28,13 +29,16 @@ export default function App() {
         <Links />
       </head>
       <body className="flex h-full flex-col justify-between bg-background text-foreground">
-      <header className="container mx-auto py-6">
+				<header className="container mx-auto py-6">
 					<nav className="flex justify-between">
-						<div>
+						<Link to="/">
 							<div className="font-light">epic</div>
 							<div className="font-bold">notes</div>
-						</div>
-					</nav>
+						</Link>
+						<Link className="underline" to="users/kody/notes/d27a197e">
+							Kody's Notes
+						</Link>
+						</nav>
 				</header>
         <div className="flex-1">
 					<Outlet />
