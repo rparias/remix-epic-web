@@ -9,7 +9,8 @@
     "start": "remix-serve build",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "prepare": "husky"
   },
   "dependencies": {
     "@remix-run/css-bundle": "^2.11.2",
@@ -36,6 +37,8 @@
     "autoprefixer": "^10.4.16",
     "eslint": "^8.47.0",
     "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.1.5",
+    "lint-staged": "^15.2.9",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.6",
     "remix-flat-routes": "^0.6.4",
@@ -52,5 +55,11 @@
   ],
   "engines": {
     "node": ">=18.0.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "npm run format",
+      "npm run lint"
+    ]
   }
 }

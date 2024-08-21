@@ -1,6 +1,6 @@
-import { type Config } from 'tailwindcss'
-import defaultTheme from 'tailwindcss/defaultTheme.js'
-import animatePlugin from 'tailwindcss-animate'
+import { type Config } from 'tailwindcss';
+import defaultTheme from 'tailwindcss/defaultTheme.js';
+import animatePlugin from 'tailwindcss-animate';
 
 export default {
 	content: ['./app/**/*.{ts,tsx,jsx,js}'],
@@ -120,4 +120,4 @@ export default {
 		},
 	},
 	plugins: [animatePlugin],
-} satisfies Config
+} satisfies Config;

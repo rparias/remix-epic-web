@@ -1,12 +1,12 @@
-import { type ClassValue, clsx } from 'clsx'
-import { twMerge } from 'tailwind-merge'
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 /**
  * A handy utility that makes constructing class names easier.
  * It also merges tailwind classes.
  */
 export function cn(...inputs: ClassValue[]) {
-	return twMerge(clsx(inputs))
+	return twMerge(clsx(inputs));
 }
 
 /**
@@ -34,8 +34,8 @@ export function invariantResponse(
 			typeof message === 'function'
 				? message()
 				: message ||
-				'An invariant failed, please provide a message to explain why.',
+					'An invariant failed, please provide a message to explain why.',
 			{ status: 400, ...responseInit },
-		)
+		);
 	}
 }

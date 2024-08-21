@@ -1,11 +1,11 @@
-import { Link, NavLink, Outlet, useParams } from '@remix-run/react'
-import { cn } from '~/utils/misc'
+import { Link, NavLink, Outlet, useParams } from '@remix-run/react';
+import { cn } from '~/utils/misc';
 
 export default function NotesRoute() {
-	const params = useParams()
-	const ownerDisplayName = params.username
+	const params = useParams();
+	const ownerDisplayName = params.username;
 	const navLinkDefaultClassName =
-		'line-clamp-2 block rounded-l-full py-2 pl-8 pr-6 text-base lg:text-xl'
+		'line-clamp-2 block rounded-l-full py-2 pl-8 pr-6 text-base lg:text-xl';
 
 	return (
 		<main className="container flex h-full min-h-[400px] pb-12 px-0 md:px-8">
@@ -36,5 +36,5 @@ export default function NotesRoute() {
 				</div>
 			</div>
 		</main>
-	)
+	);
 }

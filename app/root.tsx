@@ -5,19 +5,19 @@ import {
 	Outlet,
 	Meta,
 	Scripts,
-} from '@remix-run/react'
-import { type LinksFunction } from '@remix-run/node'
-import faviconAssetUrl from './assets/favicon.svg'
-import fontStylesheetUrl from './styles/font.css'
-import tailwindUrl from './styles/tailwind.css'
+} from '@remix-run/react';
+import { type LinksFunction } from '@remix-run/node';
+import faviconAssetUrl from './assets/favicon.svg';
+import fontStylesheetUrl from './styles/font.css';
+import tailwindUrl from './styles/tailwind.css';
 
 export const links: LinksFunction = () => {
 	return [
 		{ rel: 'icon', type: 'image/svg+xml', href: faviconAssetUrl },
 		{ rel: 'stylesheet', href: fontStylesheetUrl },
 		{ rel: 'stylesheet', href: tailwindUrl },
-	].filter(Boolean)
-}
+	].filter(Boolean);
+};
 
 export default function App() {
 	return (
@@ -55,5 +55,5 @@ export default function App() {
 				<LiveReload />
 			</body>
 		</html>
-	)
+	);
 }

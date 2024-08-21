@@ -11,7 +11,7 @@ module.exports = {
 	proseWrap: 'always',
 	quoteProps: 'as-needed',
 	requirePragma: false,
-	semi: false,
+	semi: true,
 	singleAttributePerLine: false,
 	singleQuote: true,
 	tabWidth: 2,
@@ -32,4 +32,4 @@ module.exports = {
 			},
 		},
 	],
-}
+};

@@ -1,4 +1,4 @@
-import { flatRoutes } from 'remix-flat-routes'
+import { flatRoutes } from 'remix-flat-routes';
 
 /** @type {import('@remix-run/dev').AppConfig} */
 export default {
@@ -15,6 +15,6 @@ export default {
 				'**/*.test.{js,jsx,ts,tsx}',
 				'**/__*.*',
 			],
-		})
+		});
 	},
-}
+};

@@ -2,5 +2,5 @@
 // http://localhost:3000/resources/healthcheck
 
 export async function loader() {
-	return new Response('OK')
+	return new Response('OK');
 }
