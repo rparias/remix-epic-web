@@ -1,5 +1,5 @@
-import {useLoaderData, useParams} from "@remix-run/react"
-import { db } from "app/utils/db.server"
+import { useLoaderData } from "@remix-run/react";
+import { db } from "app/utils/db.server";
 import { LoaderFunctionArgs } from "@remix-run/node";
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
