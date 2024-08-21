@@ -13,10 +13,13 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@radix-ui/react-label": "^2.1.0",
+    "@radix-ui/react-slot": "^1.1.0",
     "@remix-run/css-bundle": "^2.11.2",
     "@remix-run/node": "^2.11.2",
     "@remix-run/react": "^2.11.2",
     "@remix-run/serve": "^2.11.2",
+    "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "isbot": "^3.6.13",
     "match-sorter": "^6.3.4",
