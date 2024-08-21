@@ -1,6 +1,6 @@
+import { type LoaderFunctionArgs } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
 import { db } from 'app/utils/db.server'
-import { LoaderFunctionArgs } from '@remix-run/node'
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
 	const note = db.note.findFirst({
@@ -16,6 +16,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 
 export default function NoteRoute() {
 	const data = useLoaderData<typeof loader>()
+	// @ts-expect-error 🦺 we'll fix this next
 	const { note } = data
 
 	return (
