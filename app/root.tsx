@@ -1,15 +1,15 @@
 import {
 	Link,
-  Links,
-  LiveReload,
-  Outlet,
-  Meta,
-  Scripts,
-} from "@remix-run/react";
-import { type LinksFunction } from "@remix-run/node";
-import faviconAssetUrl from './assets/favicon.svg';
-import fontStylesheetUrl from './styles/font.css';
-import tailwindUrl from './styles/tailwind.css';
+	Links,
+	LiveReload,
+	Outlet,
+	Meta,
+	Scripts,
+} from '@remix-run/react'
+import { type LinksFunction } from '@remix-run/node'
+import faviconAssetUrl from './assets/favicon.svg'
+import fontStylesheetUrl from './styles/font.css'
+import tailwindUrl from './styles/tailwind.css'
 
 export const links: LinksFunction = () => {
 	return [
@@ -20,15 +20,15 @@ export const links: LinksFunction = () => {
 }
 
 export default function App() {
-  return (
-    <html lang="en" className="h-full overflow-x-hidden">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <Meta />
-        <Links />
-      </head>
-      <body className="flex h-full flex-col justify-between bg-background text-foreground">
+	return (
+		<html lang="en" className="h-full overflow-x-hidden">
+			<head>
+				<meta charSet="utf-8" />
+				<meta name="viewport" content="width=device-width, initial-scale=1" />
+				<Meta />
+				<Links />
+			</head>
+			<body className="flex h-full flex-col justify-between bg-background text-foreground">
 				<header className="container mx-auto py-6">
 					<nav className="flex justify-between">
 						<Link to="/">
@@ -38,9 +38,9 @@ export default function App() {
 						<Link className="underline" to="users/kody/notes/d27a197e">
 							Kody's Notes
 						</Link>
-						</nav>
+					</nav>
 				</header>
-        <div className="flex-1">
+				<div className="flex-1">
 					<Outlet />
 				</div>
 
@@ -53,7 +53,7 @@ export default function App() {
 				<div className="h-5" />
 				<Scripts />
 				<LiveReload />
-      </body>
-    </html>
-  );
+			</body>
+		</html>
+	)
 }
