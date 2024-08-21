@@ -1,15 +1,34 @@
-import { Link, useParams } from '@remix-run/react'
+import { json, type LoaderFunctionArgs } from '@remix-run/node';
+import { Link, useLoaderData } from '@remix-run/react';
+import { db } from 'app/utils/db.server';
+import { invariantResponse } from '~/utils/misc';
+
+export async function loader({ request, params }: LoaderFunctionArgs) {
+	const user = db.user.findFirst({
+		where: {
+			username: { equals: params.username },
+		},
+	});
+
+	invariantResponse(user, 'User not found');
+
+	return json({
+		user: {
+			username: user.username,
+		},
+	});
+}
 
 export default function ProfileRoute() {
-	const params = useParams()
-	const { username } = params
+	const data = useLoaderData<typeof loader>();
+	const { user } = data;
 
 	return (
 		<div className="container mb-48 mt-36">
-			<h1 className="text-h1">{username}</h1>
+			<h1 className="text-h1">{user.username}</h1>
 			<Link to="notes" className="underline">
 				Notes
 			</Link>
 		</div>
-	)
+	);
 }
