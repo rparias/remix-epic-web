@@ -1,6 +1,7 @@
-import { type LoaderFunctionArgs } from '@remix-run/node'
+import { json, type LoaderFunctionArgs } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
 import { db } from 'app/utils/db.server'
+import { invariantResponse } from "~/utils/misc";
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
 	const note = db.note.findFirst({
@@ -9,14 +10,18 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 		},
 	})
 
-	return new Response(JSON.stringify({ note }), {
-		headers: { 'content-type': 'application/json' },
+	invariantResponse(note, 'Note not found');
+
+	return json({
+		note: {
+			title: note.title,
+			content: note.content,
+		}
 	})
 }
 
 export default function NoteRoute() {
 	const data = useLoaderData<typeof loader>()
-	// @ts-expect-error 🦺 we'll fix this next
 	const { note } = data
 
 	return (
