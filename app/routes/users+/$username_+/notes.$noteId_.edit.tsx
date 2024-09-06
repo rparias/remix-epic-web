@@ -1,4 +1,9 @@
-import { json, type LoaderFunctionArgs } from '@remix-run/node';
+import {
+	type ActionFunctionArgs,
+	type LoaderFunctionArgs,
+	json,
+	redirect,
+} from '@remix-run/node';
 import { useLoaderData, Form } from '@remix-run/react';
 import { db } from 'app/utils/db.server';
 import { invariantResponse } from 'app/utils/misc';
@@ -7,6 +12,20 @@ import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
 import { Label } from '~/components/ui/label';
 import { Textarea } from '~/components/ui/textarea';
+
+export async function action({ request, params }: ActionFunctionArgs) {
+	const formData = await request.formData();
+	const title = formData.get('title');
+	const content = formData.get('content');
+
+	db.note.update({
+		where: { id: { equals: params.noteId } },
+		// @ts-expect-error 🦺 we'll fix this next...
+		data: { title, content },
+	});
+
+	return redirect(`/users/${params.username}/notes/${params.noteId}`);
+}
 
 export async function loader({ params }: LoaderFunctionArgs) {
 	const note = db.note.findFirst({
