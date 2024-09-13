@@ -1,4 +1,9 @@
-import { json, type LoaderFunctionArgs } from '@remix-run/node';
+import {
+	type LoaderFunctionArgs,
+	type ActionFunctionArgs,
+	json,
+	redirect,
+} from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
 import { db } from 'app/utils/db.server';
 import { floatingToolbarClassName } from '~/components/floating-toolbar';
@@ -22,6 +27,14 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 	});
 }
 
+export async function action({ params }: ActionFunctionArgs) {
+	db.note.delete({
+		where: { id: { equals: params.noteId } },
+	});
+
+	return redirect(`/users/${params.username}/notes`);
+}
+
 export default function NoteRoute() {
 	const data = useLoaderData<typeof loader>();
 	const { note } = data;
@@ -35,7 +48,11 @@ export default function NoteRoute() {
 				</p>
 			</div>
 			<div className={floatingToolbarClassName}>
-				<Button variant="destructive">Delete</Button>
+				<form method="post">
+					<Button type="submit" variant="destructive">
+						Delete
+					</Button>
+				</form>
 				<Button asChild>
 					<Link to="edit">Edit</Link>
 				</Button>
