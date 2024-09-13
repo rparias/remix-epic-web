@@ -55,6 +55,7 @@ export default function NoteRoute() {
 			</div>
 			<div className={floatingToolbarClassName}>
 				<form method="post">
+					{/* Wrapping button on a form allow Remix to handle edge cases, like clicking button twice or leaving the page */}
 					<Button
 						type="submit"
 						variant="destructive"
