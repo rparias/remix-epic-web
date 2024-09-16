@@ -1,3 +1,4 @@
+import { type LinksFunction } from '@remix-run/node';
 import {
 	Link,
 	Links,
@@ -5,8 +6,8 @@ import {
 	Outlet,
 	Meta,
 	Scripts,
+	ScrollRestoration,
 } from '@remix-run/react';
-import { type LinksFunction } from '@remix-run/node';
 import faviconAssetUrl from './assets/favicon.svg';
 import fontStylesheetUrl from './styles/font.css';
 import tailwindUrl from './styles/tailwind.css';
@@ -51,6 +52,7 @@ export default function App() {
 					</div>
 				</div>
 				<div className="h-5" />
+				<ScrollRestoration />
 				<Scripts />
 				<LiveReload />
 			</body>
