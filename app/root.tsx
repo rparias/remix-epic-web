@@ -1,4 +1,5 @@
-import { type LinksFunction } from '@remix-run/node';
+import os from 'node:os';
+import { type LinksFunction, json } from '@remix-run/node';
 import {
 	Link,
 	Links,
@@ -7,10 +8,12 @@ import {
 	Meta,
 	Scripts,
 	ScrollRestoration,
+	useLoaderData,
 } from '@remix-run/react';
 import faviconAssetUrl from './assets/favicon.svg';
 import fontStylesheetUrl from './styles/font.css';
 import tailwindUrl from './styles/tailwind.css';
+import { getEnv } from './utils/env.server';
 
 export const links: LinksFunction = () => {
 	return [
@@ -20,7 +23,12 @@ export const links: LinksFunction = () => {
 	].filter(Boolean);
 };
 
+export async function loader() {
+	return json({ username: os.userInfo().username, ENV: getEnv() });
+}
+
 export default function App() {
+	const data = useLoaderData<typeof loader>();
 	return (
 		<html lang="en" className="h-full overflow-x-hidden">
 			<head>
@@ -53,6 +61,11 @@ export default function App() {
 				</div>
 				<div className="h-5" />
 				<ScrollRestoration />
+				<script
+					dangerouslySetInnerHTML={{
+						__html: `window.ENV = ${JSON.stringify(data.ENV)}`,
+					}}
+				/>
 				<Scripts />
 				<LiveReload />
 			</body>
