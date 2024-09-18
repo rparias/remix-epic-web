@@ -13,7 +13,7 @@ import {
 import faviconAssetUrl from './assets/favicon.svg';
 import fontStylesheetUrl from './styles/font.css';
 import tailwindUrl from './styles/tailwind.css';
-import { getEnv } from './utils/env.server';
+import { getEnv } from './utils/env.server.ts';
 
 export const links: LinksFunction = () => {
 	return [

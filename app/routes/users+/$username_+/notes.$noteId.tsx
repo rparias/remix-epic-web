@@ -5,10 +5,10 @@ import {
 	redirect,
 } from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
-import { db } from 'app/utils/db.server';
-import { floatingToolbarClassName } from '~/components/floating-toolbar';
-import { Button } from '~/components/ui/button';
-import { invariantResponse } from '~/utils/misc';
+import { floatingToolbarClassName } from '#app/components/floating-toolbar.tsx';
+import { Button } from '#app/components/ui/button.tsx';
+import { db } from '#app/utils/db.server.ts';
+import { invariantResponse } from '#app/utils/misc.tsx';
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
 	const note = db.note.findFirst({

@@ -1,7 +1,7 @@
 import { json, type LoaderFunctionArgs } from '@remix-run/node';
 import { Link, NavLink, Outlet, useLoaderData } from '@remix-run/react';
-import { db } from 'app/utils/db.server';
-import { cn, invariantResponse } from '~/utils/misc';
+import { db } from '#app/utils/db.server.ts';
+import { cn, invariantResponse } from '#app/utils/misc.tsx';
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
 	const owner = db.user.findFirst({

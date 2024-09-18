@@ -5,13 +5,13 @@ import {
 	redirect,
 } from '@remix-run/node';
 import { useLoaderData, Form } from '@remix-run/react';
-import { db } from 'app/utils/db.server';
-import { invariantResponse } from 'app/utils/misc';
-import { floatingToolbarClassName } from '~/components/floating-toolbar';
-import { Button } from '~/components/ui/button';
-import { Input } from '~/components/ui/input';
-import { Label } from '~/components/ui/label';
-import { Textarea } from '~/components/ui/textarea';
+import { floatingToolbarClassName } from '#app/components/floating-toolbar.tsx';
+import { Button } from '#app/components/ui/button.tsx';
+import { Input } from '#app/components/ui/input.tsx';
+import { Label } from '#app/components/ui/label.tsx';
+import { Textarea } from '#app/components/ui/textarea.tsx';
+import { db } from '#app/utils/db.server.ts';
+import { invariantResponse } from '#app/utils/misc.tsx';
 
 export async function action({ request, params }: ActionFunctionArgs) {
 	const formData = await request.formData();
