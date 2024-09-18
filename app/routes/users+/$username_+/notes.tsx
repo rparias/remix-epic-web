@@ -46,6 +46,7 @@ export default function NotesRoute() {
 							{notes.map(({ id, title }) => (
 								<li className="p-1 pr-0" key={id}>
 									<NavLink
+										prefetch="viewport"
 										preventScrollReset={true}
 										to={id}
 										className={({ isActive }) =>
