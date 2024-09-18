@@ -3,6 +3,9 @@
   "private": true,
   "sideEffects": false,
   "type": "module",
+  "imports": {
+    "#*": "./*"
+  },
   "scripts": {
     "build": "remix build",
     "dev": "remix dev --manual",
@@ -57,9 +60,6 @@
     "/public/build",
     "/server-build"
   ],
-  "engines": {
-    "node": ">=18.0.0"
-  },
   "lint-staged": {
     "*.{ts,tsx}": [
       "npm run format",
