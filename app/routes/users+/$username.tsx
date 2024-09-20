@@ -1,7 +1,17 @@
 import { json, type LoaderFunctionArgs } from '@remix-run/node';
-import { Link, useLoaderData } from '@remix-run/react';
+import { Link, useLoaderData, type MetaFunction } from '@remix-run/react';
 import { db } from '#app/utils/db.server.ts';
 import { invariantResponse } from '#app/utils/misc.tsx';
+
+export const meta: MetaFunction = () => {
+	return [
+		{ title: 'Profile | Epic Notes Remix' },
+		{
+			name: 'description',
+			content: 'Checkout this Profile on Epic Notes Remix',
+		},
+	];
+};
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
 	const user = db.user.findFirst({

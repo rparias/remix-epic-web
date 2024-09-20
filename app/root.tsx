@@ -9,11 +9,22 @@ import {
 	Scripts,
 	ScrollRestoration,
 	useLoaderData,
+	type MetaFunction,
 } from '@remix-run/react';
 import faviconAssetUrl from './assets/favicon.svg';
 import fontStylesheetUrl from './styles/font.css';
 import tailwindUrl from './styles/tailwind.css';
 import { getEnv } from './utils/env.server.ts';
+
+export const meta: MetaFunction = () => {
+	return [
+		{ title: 'Epic Notes' },
+		{
+			name: 'description',
+			content: 'A simple note-taking app built with Remix',
+		},
+	];
+};
 
 export const links: LinksFunction = () => {
 	return [
