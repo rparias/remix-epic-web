@@ -3,12 +3,13 @@ import { Link, useLoaderData, type MetaFunction } from '@remix-run/react';
 import { db } from '#app/utils/db.server.ts';
 import { invariantResponse } from '#app/utils/misc.tsx';
 
-export const meta: MetaFunction = () => {
+export const meta: MetaFunction<typeof loader> = ({ data, params }) => {
+	const displayName = data?.user.name || params.username;
 	return [
-		{ title: 'Profile | Epic Notes Remix' },
+		{ title: `${displayName} | Epic Notes Remix` },
 		{
 			name: 'description',
-			content: 'Checkout this Profile on Epic Notes Remix',
+			content: `Profile of ${displayName} on Epic Notes Remix`,
 		},
 	];
 };
@@ -24,6 +25,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 
 	return json({
 		user: {
+			name: user.name,
 			username: user.username,
 		},
 	});
