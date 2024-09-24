@@ -9,15 +9,28 @@ import { floatingToolbarClassName } from '#app/components/floating-toolbar.tsx';
 import { Button } from '#app/components/ui/button.tsx';
 import { db } from '#app/utils/db.server.ts';
 import { invariantResponse } from '#app/utils/misc.tsx';
+import { type loader as notesLoader } from './notes.tsx';
 
-export const meta: MetaFunction<typeof loader> = ({ data, params }) => {
-	const title = data?.note.title || null;
-	const content = data?.note.content || null;
+export const meta: MetaFunction<
+	typeof loader,
+	{ 'routes/users+/$username_+/notes': typeof notesLoader }
+> = ({ data, matches, params }) => {
+	const notesMatch = matches.find(
+		match => match.id === 'routes/users+/$username_+/notes',
+	);
+	const displayName = notesMatch?.data?.owner.name ?? params.username;
+
+	const noteTitle = data?.note.title ?? 'Note';
+	const noteContentsSummary =
+		data && data.note.content.length > 100
+			? data.note.content.slice(0, 97) + '...'
+			: data?.note.content || 'No content';
+
 	return [
-		{ title: `${title} | ${params.username}'s Notes | Epic Notes Remix` },
+		{ title: `${noteTitle} | ${displayName}'s Notes | Epic Notes Remix` },
 		{
 			name: 'description',
-			content,
+			content: noteContentsSummary,
 		},
 	];
 };
