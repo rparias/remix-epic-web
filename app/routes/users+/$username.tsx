@@ -1,5 +1,10 @@
 import { json, type LoaderFunctionArgs } from '@remix-run/node';
-import { Link, useLoaderData, type MetaFunction } from '@remix-run/react';
+import {
+	Link,
+	useLoaderData,
+	useRouteError,
+	type MetaFunction,
+} from '@remix-run/react';
 import { db } from '#app/utils/db.server.ts';
 import { invariantResponse } from '#app/utils/misc.tsx';
 
@@ -15,6 +20,7 @@ export const meta: MetaFunction<typeof loader> = ({ data, params }) => {
 };
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
+	// throw new Error('🐨 Loader error')
 	const user = db.user.findFirst({
 		where: {
 			username: { equals: params.username },
@@ -32,6 +38,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 }
 
 export default function ProfileRoute() {
+	// throw new Error('🐨 Component error')
 	const data = useLoaderData<typeof loader>();
 	const { user } = data;
 
@@ -41,6 +48,18 @@ export default function ProfileRoute() {
 			<Link to="notes" className="underline" prefetch="render">
 				Notes
 			</Link>
+		</div>
+	);
+}
+
+export function ErrorBoundary() {
+	const error = useRouteError();
+	console.error(error);
+
+	return (
+		<div className="container mx-auto flex h-full w-full items-center justify-center bg-destructive p-20 text-h2 text-destructive-foreground">
+			<h1>Oh no!</h1>
+			<p>Something bad happened! Sorry!</p>
 		</div>
 	);
 }
