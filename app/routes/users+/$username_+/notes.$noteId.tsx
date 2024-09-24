@@ -4,11 +4,23 @@ import {
 	json,
 	redirect,
 } from '@remix-run/node';
-import { Link, useLoaderData } from '@remix-run/react';
+import { Link, useLoaderData, type MetaFunction } from '@remix-run/react';
 import { floatingToolbarClassName } from '#app/components/floating-toolbar.tsx';
 import { Button } from '#app/components/ui/button.tsx';
 import { db } from '#app/utils/db.server.ts';
 import { invariantResponse } from '#app/utils/misc.tsx';
+
+export const meta: MetaFunction<typeof loader> = ({ data, params }) => {
+	const title = data?.note.title || null;
+	const content = data?.note.content || null;
+	return [
+		{ title: `${title} | ${params.username}'s Notes | Epic Notes Remix` },
+		{
+			name: 'description',
+			content,
+		},
+	];
+};
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
 	const note = db.note.findFirst({

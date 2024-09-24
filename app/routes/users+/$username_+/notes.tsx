@@ -1,25 +1,7 @@
 import { json, type LoaderFunctionArgs } from '@remix-run/node';
-import {
-	Link,
-	NavLink,
-	Outlet,
-	useLoaderData,
-	type MetaFunction,
-} from '@remix-run/react';
+import { Link, NavLink, Outlet, useLoaderData } from '@remix-run/react';
 import { db } from '#app/utils/db.server.ts';
 import { cn, invariantResponse } from '#app/utils/misc.tsx';
-
-export const meta: MetaFunction<typeof loader> = ({ data, params }) => {
-	const displayName = data?.owner.name || params.username;
-	const notesCount = data?.notes.length || 0;
-	return [
-		{ title: `${displayName}'s Notes | Epic Notes Remix` },
-		{
-			name: 'description',
-			content: `Checkout ${displayName}'s ${notesCount} notes on Epic Notes Remix`,
-		},
-	];
-};
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
 	const owner = db.user.findFirst({
