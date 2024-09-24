@@ -1,7 +1,9 @@
 import { json, type LoaderFunctionArgs } from '@remix-run/node';
 import {
 	Link,
+	isRouteErrorResponse,
 	useLoaderData,
+	useParams,
 	useRouteError,
 	type MetaFunction,
 } from '@remix-run/react';
@@ -20,14 +22,13 @@ export const meta: MetaFunction<typeof loader> = ({ data, params }) => {
 };
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
-	// throw new Error('🐨 Loader error')
 	const user = db.user.findFirst({
 		where: {
 			username: { equals: params.username },
 		},
 	});
 
-	invariantResponse(user, 'User not found');
+	invariantResponse(user, 'User not found', { status: 404 });
 
 	return json({
 		user: {
@@ -38,7 +39,6 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 }
 
 export default function ProfileRoute() {
-	// throw new Error('🐨 Component error')
 	const data = useLoaderData<typeof loader>();
 	const { user } = data;
 
@@ -54,12 +54,25 @@ export default function ProfileRoute() {
 
 export function ErrorBoundary() {
 	const error = useRouteError();
+	const params = useParams();
+	const { username } = params;
+
 	console.error(error);
+
+	let errorMessage = 'Oh no, something went wrong. Sorry about that.';
+
+	if (isRouteErrorResponse(error)) {
+		if (error.status === 404) {
+			errorMessage = `User "${username}" not found`;
+		}
+		if (error.status === 401) {
+			errorMessage = 'You are not authorized to view this page';
+		}
+	}
 
 	return (
 		<div className="container mx-auto flex h-full w-full items-center justify-center bg-destructive p-20 text-h2 text-destructive-foreground">
-			<h1>Oh no!</h1>
-			<p>Something bad happened! Sorry!</p>
+			<p>{errorMessage}</p>
 		</div>
 	);
 }
