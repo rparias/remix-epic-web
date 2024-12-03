@@ -55,24 +55,17 @@ export default function ProfileRoute() {
 export function ErrorBoundary() {
 	const error = useRouteError();
 	const params = useParams();
-	const { username } = params;
-
 	console.error(error);
 
-	let errorMessage = 'Oh no, something went wrong. Sorry about that.';
+	let errorMessage = <p>Oh no, something went wrong. Sorry about that.</p>;
 
-	if (isRouteErrorResponse(error)) {
-		if (error.status === 404) {
-			errorMessage = `User "${username}" not found`;
-		}
-		if (error.status === 401) {
-			errorMessage = 'You are not authorized to view this page';
-		}
+	if (isRouteErrorResponse(error) && error.status === 404) {
+		errorMessage = <p>No user with the username "{params.username}" exists</p>;
 	}
 
 	return (
 		<div className="container mx-auto flex h-full w-full items-center justify-center bg-destructive p-20 text-h2 text-destructive-foreground">
-			<p>{errorMessage}</p>
+			{errorMessage}
 		</div>
 	);
 }
